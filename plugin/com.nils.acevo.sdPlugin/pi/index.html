@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: Arial, sans-serif; background: #2d2d2d; color: #d8d8d8; margin: 0; padding: 12px; font-size: 13px; }
+  label { display: block; margin: 10px 0 4px; }
+  select { width: 100%; background: #3d3d3d; color: #fff; border: 1px solid #555; padding: 6px; border-radius: 4px; }
+  .hint { color: #8a8a8a; margin-top: 10px; font-size: 11px; }
+</style>
+</head>
+<body>
+  <label id="l_metric" for="metric"></label>
+  <select id="metric"></select>
+
+  <label id="l_flag" for="flagMode"></label>
+  <select id="flagMode"></select>
+  <div class="hint" id="hint"></div>
+
+<script>
+  // [Wert, English, Deutsch]
+  const METRICS = [
+    ['abs', 'ABS level', 'ABS-Stufe'], ['tc', 'TC level', 'TC-Stufe'], ['cut', 'TC cut', 'TC-Cut'], ['map', 'Engine map', 'Motor-Map'],
+    ['bb', 'Brake bias', 'Bremsbalance'], ['fuel', 'Fuel', 'Sprit'], ['fuellaps', 'Fuel laps remaining', 'Restrunden Sprit'],
+    ['gear', 'Gear', 'Gang'], ['limiter', 'Pit limiter', 'Boxenlimiter'],
+    ['tt_fl', 'Tyre temp FL', 'Reifentemperatur VL'], ['tt_fr', 'Tyre temp FR', 'Reifentemperatur VR'], ['tt_rl', 'Tyre temp RL', 'Reifentemperatur HL'], ['tt_rr', 'Tyre temp RR', 'Reifentemperatur HR'],
+    ['tp_fl', 'Tyre pressure FL', 'Reifendruck VL'], ['tp_fr', 'Tyre pressure FR', 'Reifendruck VR'], ['tp_rl', 'Tyre pressure RL', 'Reifendruck HL'], ['tp_rr', 'Tyre pressure RR', 'Reifendruck HR'],
+    ['tw_fl', 'Tyre wear FL', 'Reifenverschleiß VL'], ['tw_fr', 'Tyre wear FR', 'Reifenverschleiß VR'], ['tw_rl', 'Tyre wear RL', 'Reifenverschleiß HL'], ['tw_rr', 'Tyre wear RR', 'Reifenverschleiß HR'],
+    ['tyreavg', 'Tyre temp average', 'Reifen Durchschnitt'], ['wearmax', 'Tyre wear max', 'Reifenverschleiß max'],
+    ['lap', 'Current lap', 'Aktuelle Runde'], ['last', 'Last lap', 'Letzte Runde'], ['best', 'Best lap', 'Beste Runde'], ['delta', 'Delta to best', 'Delta zur Bestzeit'],
+    ['pos', 'Position', 'Position'], ['laps', 'Laps', 'Runden'], ['left', 'Time left', 'Restzeit'], ['sector', 'Sector', 'Sektor'],
+    ['speed', 'Speed', 'Geschwindigkeit'], ['rpm', 'RPM', 'Drehzahl'], ['oil', 'Oil temperature', 'Öltemperatur'], ['air', 'Air temperature', 'Lufttemperatur'], ['road', 'Track temperature', 'Streckentemperatur'],
+    ['damage', 'Damage', 'Schaden'], ['br_fl', 'Brake temp FL', 'Bremse VL'], ['br_fr', 'Brake temp FR', 'Bremse VR'], ['br_rl', 'Brake temp RL', 'Bremse HL'], ['br_rr', 'Brake temp RR', 'Bremse HR'],
+    ['flag', 'Flag', 'Flagge'],
+  ];
+  const FLAGMODES = [
+    ['enabled', 'On: key flashes in the flag colour', 'An: Taste blinkt in Flaggenfarbe'],
+    ['solid', 'On: key stays in the flag colour', 'An: Taste bleibt in Flaggenfarbe'],
+    ['disabled', 'Off', 'Aus'],
+  ];
+  const TXT = {
+    en: { metric: 'Value', flag: 'Flag mode', hint: 'Values come from SimHub (AC EVO must be running).' },
+    de: { metric: 'Anzeige', flag: 'Flag-Modus', hint: 'Werte kommen aus SimHub (AC Evo muss laufen).' },
+  };
+  const $ = (id) => document.getElementById(id);
+  let ws, uuid, settings = {}, lang = 'en';
+  function fill(sel, rows) { sel.innerHTML = ''; rows.forEach((r) => { const o = document.createElement('option'); o.value = r[0]; o.textContent = lang === 'de' ? r[2] : r[1]; sel.appendChild(o); }); }
+  function save() {
+    settings = { metric: $('metric').value, flagMode: $('flagMode').value };
+    ws.send(JSON.stringify({ event: 'setSettings', context: uuid, payload: settings }));
+  }
+  function connectElgatoStreamDeckSocket(port, inUUID, registerEvent, info, actionInfo) {
+    uuid = inUUID;
+    try { lang = String(JSON.parse(info).application.language || 'en').toLowerCase().startsWith('de') ? 'de' : 'en'; } catch (e) { lang = 'en'; }
+    settings = (JSON.parse(actionInfo).payload || {}).settings || {};
+    const t = TXT[lang];
+    $('l_metric').textContent = t.metric; $('l_flag').textContent = t.flag; $('hint').textContent = t.hint;
+    fill($('metric'), METRICS); fill($('flagMode'), FLAGMODES);
+    $('metric').value = settings.metric || 'abs';
+    $('flagMode').value = settings.flagMode || 'enabled';
+    ws = new WebSocket('ws://127.0.0.1:' + port);
+    ws.onopen = () => ws.send(JSON.stringify({ event: registerEvent, uuid: inUUID }));
+    $('metric').onchange = save;
+    $('flagMode').onchange = save;
+  }
+</script>
+</body>
+</html>

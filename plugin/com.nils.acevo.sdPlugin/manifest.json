@@ -1,0 +1,53 @@
+{
+    "Name":  "AC Evo Live",
+    "Author":  "Nils",
+    "Description":  "Live values and car controls for Assetto Corsa EVO on the Stream Deck XL, powered by SimHub.",
+    "Version":  "1.0.0.0",
+    "SDKVersion":  2,
+    "Category":  "AC Evo",
+    "CategoryIcon":  "images/category",
+    "Icon":  "images/plugin-icon",
+    "CodePath":  "plugin.js",
+    "Nodejs":  {
+                   "Version":  "20",
+                   "Debug":  "disabled"
+               },
+    "OS":  [
+               {
+                   "Platform":  "windows",
+                   "MinimumVersion":  "10"
+               }
+           ],
+    "Software":  {
+                     "MinimumVersion":  "6.4"
+                 },
+    "Actions":  [
+                    {
+                        "Name":  "Evo Display",
+                        "UUID":  "com.nils.acevo.display",
+                        "Icon":  "images/action-display",
+                        "Tooltip":  "Shows a live SimHub value from AC EVO (choose the value in the settings)",
+                        "States":  [
+                                       {
+                                           "Image":  "images/icon"
+                                       }
+                                   ],
+                        "UserTitleEnabled":  false,
+                        "SupportedInMultiActions":  false
+                    },
+                    {
+                        "Name":  "Set Up Keys",
+                        "UUID":  "com.nils.acevo.setup",
+                        "Icon":  "images/action-setup",
+                        "Tooltip":  "Writes the key bindings this profile needs into AC EVO (close the game first, a backup is created)",
+                        "States":  [
+                                       {
+                                           "Image":  "images/icon"
+                                       }
+                                   ],
+                        "UserTitleEnabled":  false,
+                        "SupportedInMultiActions":  false
+                    }
+                ],
+    "PropertyInspectorPath":  "pi/index.html"
+}
