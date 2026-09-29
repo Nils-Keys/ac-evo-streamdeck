@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232833"/><stop offset="1" stop-color="#090a0d"/></linearGradient></defs>
+<path d="M16 3 H128 L141 16 V128 L128 141 H16 L3 128 V16 Z" fill="url(#g)"/>
+<path d="M16 3 H128 L141 16 V128 L128 141 H16 L3 128 V16 Z" fill="none" stroke="#35E07A" stroke-width="4"/>
+<text x="72" y="83.0" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="44" text-anchor="middle" fill="#FFFFFF">Evo</text>
+</svg>

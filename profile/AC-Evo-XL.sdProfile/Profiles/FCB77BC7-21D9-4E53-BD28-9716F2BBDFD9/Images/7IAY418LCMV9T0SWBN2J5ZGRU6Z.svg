@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232833"/><stop offset="1" stop-color="#090a0d"/></linearGradient>
+<radialGradient id="r" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFA31A" stop-opacity="0.5"/><stop offset="1" stop-color="#FFA31A" stop-opacity="0"/></radialGradient>
+<clipPath id="c"><path d="M16 3 H128 L141 16 V128 L128 141 H16 L3 128 V16 Z"/></clipPath>
+</defs>
+<path d="M16 3 H128 L141 16 V128 L128 141 H16 L3 128 V16 Z" fill="url(#g)"/>
+<g clip-path="url(#c)"><path d="M-40 100 L60 0" stroke="#FFA31A" stroke-opacity="0.07" stroke-width="10"/><path d="M0 100 L100 0" stroke="#FFA31A" stroke-opacity="0.07" stroke-width="10"/><path d="M40 100 L140 0" stroke="#FFA31A" stroke-opacity="0.07" stroke-width="10"/><path d="M80 100 L180 0" stroke="#FFA31A" stroke-opacity="0.07" stroke-width="10"/><path d="M120 100 L220 0" stroke="#FFA31A" stroke-opacity="0.07" stroke-width="10"/><circle cx="72" cy="54" r="58" fill="url(#r)"/></g>
+<path d="M16 3 H128 L141 16 V128 L128 141 H16 L3 128 V16 Z" fill="none" stroke="#FFA31A" stroke-width="4"/>
+<path d="M18 9 H126 L135 18" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
+<g transform="translate(72 52) scale(1.08) translate(-72 -56)"><text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="36" text-anchor="middle" fill="#FFFFFF">MAP</text><circle cx="112" cy="32" r="15" fill="#FFA31A"/><path d="M104 32 h16 M112 24 v16" fill="none" stroke="#0b0c10" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M3 102 H141 V128 L128 141 H16 L3 128 Z" fill="#FFA31A"/><text x="72" y="130" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="22" letter-spacing="2" text-anchor="middle" fill="#0b0c10">UP</text>
+</svg>
